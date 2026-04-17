@@ -34,7 +34,14 @@ def _middle_position_normalized(corners):
         return None
     xmid = (corners[2] + corners[0]) / 2
     ymid = (corners[3] + corners[1]) / 2
-    return (xmid / WIDTH, ymid / HEIGHT)
+    xlen = (corners[2] - corners[0])
+    ylen = (corners[3] - corners[1])
+    longest = max((xlen, ylen))
+    if longest == xlen:
+        z_pos = longest / WIDTH
+    else:
+        z_pos = longest / HEIGHT
+    return (xmid / WIDTH, ymid / HEIGHT, z_pos)
 
 def find_red_spot(image):
     for i, line in enumerate(image):
